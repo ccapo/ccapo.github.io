@@ -1,0 +1,87 @@
+jsMath WoaS Plug-in Instructions
+--------------------------------
+These directions assume WoaS is in the /woas-0.12.0 directory.
+Contact Little Girl at littlergirl@gmail.com if these instructions are unclear.
+
+1) Go to the /woas-0.12.0/plugins/jsMath directory.
+
+2) Open the GETME text file.
+
+3) Copy the link inside the file.
+
+4) Open your browser.
+
+5) Paste the link you copied into the address box.
+
+6) Download the file (the current file is jsMath-3.6e.zip).
+
+7) Unzip the contents onto your Desktop or into a temporary directory. They will unzip into the /jsMath-3.6e directory.
+
+8) Open the /jsMath-3.6e directory.
+
+9) Select all.
+
+10) Cut.
+
+11) Paste the contents you cut into the /woas-0.12.0/plugins/jsMath directory.
+
+12) Delete the now empty /jsMath-3.6e directory.
+
+13) Open woas-0.12.0.html in your browser.
+
+14) Click the Advanced icon in the navigation bar.
+
+15) Click the [[WoaS::Plugins]] link in the Advanced features section of the page.
+
+16) Click the Import plugin... button.
+
+17) Change the selection in the Existing pages section of the page from Ignore to Overwrite or Ask before overwrite.
+
+18) Uncheck the box next to Comment JavaScript tags in the Security section of the page.
+
+19) Uncheck the box next to Comment macro definition/call in the Security section of the page.
+
+20) Check the box next to Import pages of the WoaS:: namespace (hotkeys, plugins, aliases and custom CSS).
+
+21) Click the Browse... button.
+
+22) Browse to the /woas-0.12.0/plugins/jsMath.wsif file.
+
+23) Click the Open button (or whatever button your browser has in the bottom of the browsing window you're in). This should return you to the [[WoaS::Plugins]] page in the wiki.
+
+24) Click the Import WSIF button. You should receive an alert that says WoaS: 1/1 pages imported successfully 0 pages skipped).
+
+25) Click the OK button to close the alert.
+
+26) Reload the wiki.
+
+27) Open any page in the editor.
+
+28) Paste either of these into the page, replacing CONTENT with your LaTeX math equation:
+
+<<<woas.jsmath:CONTENT>>>
+
+or
+
+<<<woas.jsmath:
+CONTENT
+>>>
+
+Note: It doesn't matter which one you use - it's just a matter of personal preference for which you find easier to read/debug.
+
+29) Save the page.
+
+Note: You can have as many of these LaTeX equations on a page as you like.
+
+======================================================================================================================
+EXAMPLE
+======================================================================================================================
+Try pasting this into a page and see how it looks:
+
+<<<woas.jsmath:\int_0^\infty f(x)\,dx \approx \sum_{i=1}^n w_i e^{x_i} f(x_i)>>>
+
+Or paste it in this way:
+
+<<<woas.jsmath:
+\int_0^\infty f(x)\,dx \approx \sum_{i=1}^n w_i e^{x_i} f(x_i)
+>>>

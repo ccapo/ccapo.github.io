@@ -1,0 +1,9 @@
+### MAIN DEFAULTS
+Options -Indexes
+DirectoryIndex index.html
+
+## PROTECT FILES
+<FilesMatch .htaccess>
+  Order Allow,Deny
+  Deny from all
+</FilesMatch>

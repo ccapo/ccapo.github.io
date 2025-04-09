@@ -1,0 +1,135 @@
+wsif.version: 1.3.1
+wsif.generator: woas
+wsif.generator.version: 0.12.0
+woas.author: Little Girl
+woas.pages: 4
+
+woas.page.title: Plug-in::Sort CSV::Help
+woas.page.attributes: 0
+woas.page.encoding: 8bit/plain
+woas.page.disposition: inline
+woas.page.boundary: DFQRCTsKlU
+
+--DFQRCTsKlU
+= Sort CSV
+This plug-in uses a macro to sort a line of comma separated value text automatically when the page is displayed while leaving the line of text inside the editor unsorted. It sorts characters first, then numbers, then letters.
+== Use
+<div class="woas_helptext">Use this code in a page, replacing CONTENT with the line of comma separated text you wish to sort:</div>{{{
+<<<csv.sort: CONTENT>>>
+}}}<div class="woas_helptext">To sort a comma separated line of text.</div>
+== Example
+<div class="woas_helptext">The sorter macro with a line of unsorted characters, numbers, and text inside it separated by commas:</div>{{{
+<<<csv.sort: banana, apple, 9, orange, %>>>
+}}}
+<div class="woas_helptext">The resulting sorted line:</div>
+<<<csv.sort: banana, apple, 9, orange, %>>>
+
+== Removal
+# Delete the *Sort CSV* plug-in from the ([[WoaS::Plugins]]) page.
+# Delete the *Sort lines* plug-in from the ([[WoaS::Plugins]]) page.
+# Delete the [[Plug-in::Sort CSV::Help]] page.
+# Delete the [[Plug-in::Sort lines::Help]] page.
+# Reload the wiki.
+
+== Support
+[[mailto://littlergirl@gmail.com?subject=WoaS Sort CSV plug-in|Send an email to Little Girl]] with comments, corrections, questions, or suggestions.\
+<!-- This is an alternative to editing the wiki source and adding this button to the editor buttons: <input class="woas_editor_button woas_button" value="Sort" onclick='woas._editor.setSelectedText( woas._editor.getSelectedText().split("\n").sort().join("\n"))' title="Sort selected rows of text" type="submit" /> -->
+<style type="text/css">
+.woas_helptext {
+	color: darkcyan;
+	font-weight: bold;
+	font-style: italic;
+	} 
+</style>
+
+--DFQRCTsKlU
+woas.page.title: WoaS::Plugins::Sort CSV
+woas.page.attributes: 0
+woas.page.encoding: 8bit/plain
+woas.page.disposition: inline
+woas.page.boundary: DFQRCTsKlU
+
+--DFQRCTsKlU
+// Sort CSV plugin
+// by Little Girl
+// Sort comma separated values in a line of text in the editor.
+// See the [[Plug-in::Sort CSV::Help]] page for instructions and an example.
+// Send an email to littlergirl@gmail.com with comments, corrections, questions, or suggestions.
+
+woas.macro.register('csv.sort', function(macro) {
+macro.text = macro.text.split(",").sort().join(","); 
+macro.reprocess = true;
+return true;
+});
+
+--DFQRCTsKlU
+woas.page.title: Plug-in::Sort lines::Help
+woas.page.attributes: 0
+woas.page.encoding: 8bit/plain
+woas.page.disposition: inline
+woas.page.boundary: DFQRCTsKlU
+
+--DFQRCTsKlU
+= Sort lines
+This plug-in uses a macro to sort lines of text automatically when the page is displayed while leaving the lines of text inside the editor unsorted. It sorts characters first, then numbers, then letters.
+== Use
+<div class="woas_helptext">Use this code in a page, replacing CONTENT with the first line of text and MORE_CONTENT with the additional line(s) of text you wish to sort:</div>{{{
+<<<line.sort:CONTENT
+MORE_CONTENT
+>>>
+}}}<div class="woas_helptext">To sort lines of text.</div>
+== Example
+<div class="woas_helptext">The sorter macro with lines of unsorted characters, numbers, and text inside it:</div>{{{
+<<<line.sort:9
+tomato
+%
+banana
+*
+zucchini
+1
+coconut
+$
+>>>
+}}}
+<div class="woas_helptext">The resulting sorted lines:</div><<<line.sort:9
+tomato
+%
+banana
+*
+zucchini
+1
+coconut
+$
+>>>
+== Support
+[[mailto://littlergirl@gmail.com?subject=WoaS Sort lines plug-in|Send an email to Little Girl]] with comments, corrections, questions, or suggestions.\
+<!-- This is an alternative to editing the wiki source and adding this button to the editor buttons: <input class="woas_editor_button woas_button" value="Sort" onclick='woas._editor.setSelectedText( woas._editor.getSelectedText().split("\n").sort().join("\n"))' title="Sort selected rows of text" type="submit" /> -->
+<style type="text/css">
+.woas_helptext {
+	color: darkcyan;
+	font-weight: bold;
+	font-style: italic;
+	} 
+</style>
+
+--DFQRCTsKlU
+woas.page.title: WoaS::Plugins::Sort lines
+woas.page.attributes: 0
+woas.page.encoding: 8bit/plain
+woas.page.disposition: inline
+woas.page.boundary: DFQRCTsKlU
+
+--DFQRCTsKlU
+// Sort lines plugin
+// by Little Girl
+// Sorts lines of text in the editor.
+// See the [[Plug-in::Sort lines::Help]] page for more information.
+// Send an email to littlergirl@gmail.com with comments, corrections, questions, or suggestions.
+
+woas.macro.register('line.sort', function(macro) {
+macro.text = macro.text.split("\n").sort().join("\n");
+macro.reprocess = true;
+return true;
+});
+
+--DFQRCTsKlU

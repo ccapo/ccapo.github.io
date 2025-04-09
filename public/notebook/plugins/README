@@ -1,0 +1,103 @@
+= ABOUT
+These plug-ins will work in Wiki on a Stick v0.12.0 to "BoaSize" it. They will create one or more pages that contain the interface itself, instructions, examples, or a mixture of the three. Those pages can always be found in the Plug-ins:: namespace. Click the Special::All Pages link in the menu to see a listing of all pages and find them.
+
+= EXCEPTIONS
+The jsMathPlug-inInstructions.txt file is an ordinary text file that explains all the steps necessary to install the jsMath plug-in. Note that at the time of this writing the plug-in appears to be incomplete and cannot display all equations properly.
+
+The newreservedpage.wsif plug-in doesn't create any pages in the Plug-ins namespace and doesn't create a help page. Instead it has a newreservedpage.wsif.readme file with an explanation and instructions.
+
+= NOTES
+When any macro is used in WoaS 0.12.0, the debug console displays "WARNING: MACRONAME did not return any value" with MACRONAME being the name of the macro in question. I don't know whether this is a development feature that was accidentally left in during release or if it has some other significance, but it doesn't seem to mean the macro is not working or that it's doing any harm.
+
+= BEFORE YOU BEGIN
+All of the files in this download are plain text. I recommend inspecting their contents so you can be sure they're not malicious and they won't conflict with the content in your wiki. I also recommend installing them into an empty copy of the wiki first so you can try them out before adding them to a valued wiki.
+
+= INSTALLATION
+1. Back up your wiki to a safe place.
+2. Open the wiki in a browser.
+3. Click the Advanced icon in the navigation bar.
+4. Click the WoaS::Plugins link in the Advanced features section of the page.
+5. Click the Import plugin... button.
+6. Make sure Overwrite or Ask before overwrite is selected in the Existing pages section of the page.
+7. Make sure only Import pages of the WoaS:: namespace (hotkeys, plugins, aliases and custom CSS) is selected in the Security section of the page.
+8. Click the Browse... button.
+9. Browse to the plug-in you'd like to install (make sure it's highlighted).
+10. Click the Open button (or the Okay button) to return to the wiki.
+11. Click the Import WSIF button.
+12. Reload the wiki.
+
+Note: The VIEWME.PNG file shows an example of the correct settings.
+
+= LIST AND DESCRIPTION OF FILES:
+
+    * acronyms.wsif – Makes it so that you can add tooltips that will display when the mouse hovers over specific text.
+
+    * autonamespace.wsif – Makes it so that any new page with a comma at the beginning of its name will have the comma replaced with the specified namespace.
+
+    * autosave.wsif – Backs up the page you are currently editing to a file in the directory the wiki is in as protection in case the browser crashes.
+
+    * coloromatic.wsif – The color-o-matic is an interface to randomly select colors for many of the wiki elements.
+
+    * columns.wsif – Syntax for creating columns of content on any page.
+
+    * customicons.wsif – Customize the icons used by the wiki.
+
+    * diary.wsif – Keep a diary.
+
+    * flatlists.wsif – Remove the header from page listings.
+
+    * folds.wsif – Syntax for adding folding content to any page.
+
+    * footnotes.wsif – Syntax for adding footnotes to any page.
+
+    * jsMathPlug-inInstructions.txt – This isn’t a plug-in. It’s instructions for using the jsMath plug-in that comes with WoaS.
+
+    * menulinknoasknoadd.wsif – Forces the wiki not to ask if you’d like to add a link to the menu when creating a new page, and not to add the link.
+
+    * menulinknoaskyesadd.wsif – Forces the wiki to add a link to the menu when creating a new page without asking for your consent first.
+
+    * namespacetemplate – Provides a template to be used for any new page in the specified namespace.
+
+    * namespacetemplatepage – Uses a specific template page for any new page in the specified namespace. It also uses a variable to insert the short page name (without the namespace) anywhere in the page.
+
+    * newreservedpage.wsif – Makes it possible for you to use the importWSIF feature of the wiki to import pages in reserved namespaces. It does this by importing itself as a temporary page, renaming the page to the name you specify, and then removing the code that made that happen from the page.
+
+    * nowikihighlight.wsif – Offers the ability to add nowiki sections to a page with all or part of their content highlighted in bold color.
+
+    * pluggablecorecontent.wsif – A demonstration of how to create pluggable core content so you can alter the structure of the wiki from within the wiki.
+
+    * replace.wsif – Replace content on a page with user-defined content.
+
+    * rewrap.wsif – Adds a rewrap button to the editor so that if you select wrapped text and click the button, it will be properly unwrapped with a space inserted between each line.
+
+    * screenplay.wsif – Write a screenplay in WoaS.
+
+    * screenplayscrippets.wsif – A CSS template designed for including short sections of screenplay-formatted material in blog posts.
+
+    * sort1.wsif – Sort content on a page using two different methods:
+
+          o Sort CSV – Uses a macro to sort a line of comma separated value text automatically when the page is displayed while leaving the line of text inside the editor unsorted.
+
+          o Sort lines – Uses a macro to sort lines of text automatically when the page is displayed while leaving the lines of text inside the editor unsorted.
+
+    * sort2.wsif – Adds a sort button to the editor so that if you select lines of text and click the button, it will sort them.
+
+    * spoilers.wsif – Syntax for creating hidden content that shows when you hover over or click on certain areas in a page.
+
+    * styleomatic.wsif – The style-o-matic is an interface to randomly select styles for many of the wiki elements.
+
+    * todolist.wsif – ToDo list that’s dynamically updated when you add or remove content to and from any page.
+
+    * tooltips.wsif – Syntax for adding tooltips to any page.
+
+    * versionedbackupsave.wsif – Automatically creates a time-stamped backup copy of the wiki in the same directory as the wiki every time you save changes to any page. When exporting WSIF files, a time-stamped copy of the index.wsif file is automatically created in the same directory as the original. When used in the development version, a time-stamped copy of the index.wsif file is created in the same directory as the original.
+
+    * wordcountbutton1.wsif – A word count button that can be added to any page or to the menu and displays the result in an alert. It displays the number of words in the main text area, considering spaces and most punctuation as separators between words. Apostrophes and hyphens are ignored and considered part of words. Numbers are ignored completely. Nowiki text is included in the count.
+
+    * wordcountbutton2.wsif – A word count button that can be added to any page or to the menu, and displays the result in the button. It displays the number of words in the main text area, considering spaces and most punctuation as separators between words. Apostrophes and hyphens are ignored and considered part of words. Numbers are ignored. Nowiki text is included in the count.
+
+    * wordcountbutton3.wsif – A word count button that can be added to any page or to the menu, and displays the result in the button. It displays the number of words in the main text area, considering spaces as separators between words. Punctuation is ignored unless surrounded by spaces.
+
+    * wordcounteditorbutton1.wsif – Adds a word count button to the editor that displays the number of words in the main text area as an alert.
+
+    * wordcounteditorbutton2.wsif – Adds a word count button to the editor that displays the number of words in the main text area with the result appearing in the button.

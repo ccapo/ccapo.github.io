@@ -1,0 +1,192 @@
+wsif.version: 1.3.1
+wsif.generator: woas
+wsif.generator.version: 0.12.0
+woas.author: legolas558 with modifications by Little Girl
+woas.pages: 2
+
+--DFQRCTsKlU
+woas.page.title: WoaS::Plugins::Columns
+woas.page.attributes: 0
+woas.page.encoding: 8bit/plain
+woas.page.disposition: inline
+woas.page.boundary: DFQRCTsKlU
+
+--DFQRCTsKlU
+// Columns macro by legolas558.
+// Based on original work by Stanky.
+// Converted to a plug-in by Little Girl.
+// See the Plug-in::Columns::Help page for instructions and examples.
+
+woas.macro.register('columns', function(macro, width, colsw) {
+	// split using the 'nextcolumn' separator
+	var cols = macro.text.replace(/\n*<nextcolumn>\n*/g, "<nextcolumn>").split("<nextcolumn>");
+	// properly initialize
+	if (!colsw)
+		colsw = [];
+	// add null widths where not specified
+	for (var i=colsw.length;i <= cols.length; ++i)
+		colsw.push(null);
+	// set table width
+	macro.text =  "<table class='columns-plugin'";
+	if (width !== null)
+		macro.text += " style='width:" + width + "%'";
+	macro.text +=  ">";
+	// output the '<col>' definitions
+	for (var i=0;i < colsw.length; ++i) {
+		macro.text = macro.text + "<col" + (colsw[i] !== null ? " style='width:" + colsw[i] + "%'": "") + ">";
+	}
+	macro.text += "<tr>";
+	for (var i=0; i < cols.length; ++i) {
+		macro.text += "<td ";
+		if (i === 0)
+			macro.text += " class='first'";
+		else if (i === cols.length-1)
+			macro.text += " class='last'";
+		macro.text += ">" + cols[i] + "</td>"; 
+	}
+	macro.text += "</tr></table>";
+	macro.reprocess = true;
+	return true;
+});
+
+--DFQRCTsKlU
+woas.page.title: Plug-in::Columns::Help
+woas.page.attributes: 0
+woas.page.encoding: 8bit/plain
+woas.page.disposition: inline
+woas.page.boundary: DFQRCTsKlU
+
+--DFQRCTsKlU
+= Columns
+This plug-in makes it so you can insert columns of text into your pages. Columns accept [[WoaS::Help::Headers|headers]], HTML text formatting, [[WoaS::Help::Images|images]], [[WoaS::Help::Links|links]], [[WoaS::Help::Lists|lists]], [[WoaS::Help::Tables|tables]], [[WoaS::Help::Nowiki text|nowiki text]], [[WoaS::Help::Rulers|rulers]], [[WoaS::Help::Transclusion|transclusions]], and [[WoaS::Help::Text formatting|wiki text formatting]]. Thanks go to [[http://woas.iragan.com/viewtopic.php?id=759|Stanky]] for the original version!
+
+== Setup
+Add these rules to the [[WoaS::CSS::Custom|custom CSS]]:<br>{{{
+/*COLUMNS MOD*/
+table.columns-plugin {
+	border-spacing: 0;
+	border-collapse: collapse;
+	border-width: 0px 0px 0px 0px;
+	margin: 0px;
+	}
+table.columns-plugin td {
+	border-left: rgb(192,192,192) 1px dotted;
+	padding-top: 0px;
+	padding: 0em 1em 0em 1em;
+	vertical-align: top;
+	}
+table.columns-plugin td.first {
+	border-top: 0px;
+	border-width: 0px 1px 0px 0px;
+	padding-left: 0px;
+	}
+table.columns-plugin td.last {
+	padding-right: 0.5em
+	}
+}}}
+
+== Use
+# Begin the first column with an opening tag. Pick one of these:<br><br>
+## Standard opening tag:<br>{{{
+<<<columns(100, [50, 50]): CONTENT
+}}}
+### The first number is the total width of all columns in percentage of page width.
+### The next numbers define the width of each column and how many columns there will be.<br><br>
+## Alternative opening tag using *null* to represent column widths:<br>{{{
+<<<columns(100, [50, null]): CONTENT
+}}}
+### The first number is the total width of all columns in percentage of page width.
+### The next number defines the width of the first column.
+### The null represents any additional columns that will use the remaining width.<br><br>
+# Begin the next column (and any additional columns) with a nextcolumn tag:<br>{{{
+<nextcolumn> CONTENT
+}}}You can add an empty line above each *nextcolumn* section or put the *nextcolumn* tag on a line by iteslf to make it easier to spot them when editing the page.<br><br>
+# Finish the column section with a closing tag:<br>{{{
+>>>
+}}}
+
+== Examples
+Each example below shows the code used to make it happen. The examples use a Lorem ipsum paragraph as content.
+
+*Example using 100% of the page width. Each column uses 50%:*<br>{{{
+<<<columns(100, [50, 50]): CONTENT
+<nextcolumn> CONTENT
+>>>
+}}}<<<columns(100, [50, 50]): Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+<nextcolumn> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+>>>
+
+*Example using 100% of the page width. The first column uses 75% and the second column uses 25%:*<br>{{{
+<<<columns(100, [75, 25]): CONTENT
+<nextcolumn> CONTENT
+>>>
+}}}<<<columns(100, [75, 25]): Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+<nextcolumn> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+>>>
+
+*Example using 100% of the page width. Each column uses 33%:*<br>{{{
+<<<columns(100, [33, null, null]): CONTENT
+<nextcolumn> CONTENT
+<nextcolumn> CONTENT
+>>>
+}}}<<<columns(100, [33, null, null]): Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+<nextcolumn> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+<nextcolumn> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+>>>
+
+*Example using 75% of the page width. The first column uses 50% and the other two columns split the remainder of the width between them evenly:*<br>{{{
+<<<columns(75, [50, null, null]): CONTENT
+<nextcolumn> CONTENT
+<nextcolumn> CONTENT
+>>>
+}}}<<<columns(75, [50, null, null]): Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+<nextcolumn> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+<nextcolumn> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+>>>
+
+*Example using 100% of the page width. Each column uses 25%:*<br>{{{
+<<<columns(100, [25, null, null, null]): CONTENT
+<nextcolumn> CONTENT
+<nextcolumn> CONTENT
+<nextcolumn> CONTENT
+>>>
+}}}<<<columns(100, [25, null, null, null]): Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+<nextcolumn> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+<nextcolumn> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+<nextcolumn> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+>>>
+
+== Removal
+If you'd like to restore list behavior to default (with a header at the top of each one):
+# Remove the rules you added to the [[WoaS::CSS::Custom|custom CSS]] page.
+# Delete the *Columns* plug-in from the ([[WoaS::Plugins]]) page.
+# Delete this [[Plug-in::Columns::Help]] page.
+# Reload the wiki.
+
+== Support
+[[mailto://littlergirl@gmail.com?subject=WoaS Columns plug-in|Send an email to Little Girl]] with comments, corrections, questions, or suggestions.
+<!-- BEGIN STYLE EMBEDDED IN THIS PAGE --><style type="text/css">
+/*COLUMNS MOD*/
+table.columns-plugin {
+	border-spacing: 0;
+	border-collapse: collapse;
+	border-width: 0px 0px 0px 0px;
+	margin: 0px;
+	}
+table.columns-plugin td {
+	border-left: rgb(192,192,192) 1px dotted;
+	padding-top: 0px;
+	padding: 0em 1em 0em 1em;
+	vertical-align: top;
+	}
+table.columns-plugin td.first {
+	border-top: 0px;
+	border-width: 0px 1px 0px 0px;
+	padding-left: 0px;
+	}
+table.columns-plugin td.last {
+	padding-right: 0.5em
+	}
+</style><!-- END STYLE EMBEDDED IN THIS PAGE -->
+
+--DFQRCTsKlU

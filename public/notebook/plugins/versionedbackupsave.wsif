@@ -1,0 +1,69 @@
+wsif.version: 1.3.1
+wsif.generator: woas
+wsif.generator.version: 0.12.0
+woas.author: FBnil
+woas.pages: 2
+
+--DFQRCTsKlU
+woas.page.title: Plug-in::Versioned backup save::Help
+woas.page.attributes: 0
+woas.page.encoding: 8bit/plain
+woas.page.disposition: inline
+woas.page.boundary: DFQRCTsKlU
+
+--DFQRCTsKlU
+= Versioned backup save
+The [[WoaS::Plugins::Versioned backup save]] plug-in works automatically to create a time-stamped backup copy of the wiki (the .html file) in the same directory as the wiki every time you save changes to any page. When exporting WSIF files, a time-stamped copy of the index.wsif file will automatically be created in the same directory as the original. When used in the development version (where the wiki is in multiple files), a time-stamped copy of the index.wsif file is created in the same directory as the original.
+
+== Use
+Use the wiki normally and the backups will be created for you automatically. If you make a lot of changes and save the wiki frequently, you may want to keep an eye on the directory so you can move or delete unneeded backups.
+
+== Removal
+To remove this plug-in:
+# Delete the *Versioned backup save* plug-in from the [[WoaS::Plugins]] page.
+# Delete this [[Plug-in::Versioned backup save::Help]] page.
+# Reload the wiki.
+
+== Support
+[[mailto://littlergirl@gmail.com?subject=WoaS versioned backup save plug-in|Send an email to Little Girl]] with comments, corrections, questions, or suggestions.
+
+--DFQRCTsKlU
+woas.page.title: WoaS::Plugins::Versioned backup save
+woas.page.attributes: 0
+woas.page.encoding: 8bit/plain
+woas.page.disposition: inline
+woas.page.boundary: DFQRCTsKlU
+
+--DFQRCTsKlU
+// Versioned backup save plug-in by FBnil
+// See the Plug-in::Versioned backup save::Help page for information and instructions.
+// Send an email to littlergirl@gmail.com with comments, corrections, questions, or suggestions.
+
+function GetISOTIMEDATE(){
+ function df(n){return n>9?n:"0"+n;}
+ var D = new Date();
+ return D.getFullYear() +"-"+ df(D.getMonth()+1) +"-"+ df(D.getDate()) + "_" + D.getHours() + df(D.getMinutes()) + df(D.getSeconds())
+}
+
+// This works with an unbuilded WoaS (separate src directory)
+woas.commit_=woas.commit;
+woas.commit= function(plist) {
+	if(woas.ORIGINALNAME=woas.config.wsif_ds){
+		woas.config.wsif_ds = woas.config.wsif_ds.replace(/(.wsif|.html?)$/, "_" + GetISOTIMEDATE() + "$1");
+		woas.commit_(plist);
+		woas.config.wsif_ds=woas.ORIGINALNAME;
+	}
+	return woas.commit_(plist);
+}
+
+// Builded WoaS
+woas.save_file_=woas.save_file;
+woas.save_file = function(fileUrl, save_mode, content) {
+	if(!woas.config.wsif_ds){
+		var fileUrl_datetime = fileUrl.replace(/(.wsif|.html?)$/i, "_" + GetISOTIMEDATE() + "$1");
+		woas.save_file_(fileUrl_datetime, save_mode, content);
+	}
+	return woas.save_file_(fileUrl, save_mode, content);
+}
+
+--DFQRCTsKlU

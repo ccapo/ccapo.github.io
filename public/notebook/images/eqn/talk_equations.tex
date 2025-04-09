@@ -1,0 +1,40 @@
+\documentclass[12pt,a4paper]{article}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+% These commands are used to highlight certain passages
+\usepackage{color}
+\newcommand{\Red}[1]{\textcolor{red}{#1}}    %% Comment or Question %%
+\newcommand{\Blue}[1]{\textcolor{blue}{#1}} %% Recommended change %%
+\newcommand{\Green}[1]{\textcolor{green}{#1}} %% Recommended change %%
+
+\begin{document}
+$ \dfrac{dN(R_{drag})}{dR_{drag}} \propto R_{drag}^{-q} $ \bigskip
+
+$ M(< R_{drag}) \propto R_{drag}^{4 - q} $ \bigskip
+
+$ \left . \dfrac{da}{dt} \right |_{scatter} = -\dfrac{2a}{P_{orb}}\left [ \dfrac{\Sigma_{solid}(a)\pi a^2}{M_{\odot}} \right ] $ \bigskip
+
+$ \tau_{typeI} = \dfrac{2.5 \times 10^6}{c_a f_s}\left ( \dfrac{a}{5.0 \hbox{~AU}}\right )^{3/2}\left ( \dfrac{M_{em}}{M_{\oplus}} \right )^{-1} $ \bigskip
+
+$ \tau_{sca} = \dfrac{2.5 \times 10^5 \hbox{~yr}}{f_s}\left ( \dfrac{a}{5.0 \hbox{~AU}}\right )\left [ 1 + \dfrac{1}{5}\left ( \dfrac{M_{em}}{M_{enc}} \right )^3\right ] $ \bigskip
+
+$ \dot{v}_{aero} \propto \dfrac{1}{R} $ \bigskip
+
+$ \tau_{sca} < \tau_{typeI} $
+
+\begin{eqnarray}
+\dot{M}_{in} &= - \dfrac{M_{in}}{\tau_{in}} + \dfrac{M_{out}}{\tau_{out}} \\
+\dot{M}_{out} &= - \dfrac{M_{out}}{\tau_{out}} + \dfrac{M_{in}}{\tau_{in}}
+\end{eqnarray}
+
+\bigskip
+
+\begin{eqnarray}
+\dot{M}_{in} &= - \dfrac{M_{in}}{\tau_{in}} + \dfrac{M_{out}}{\tau_{out}} \Blue{- \dfrac{M_{in}}{\tau_{drag,in}}}  \\
+\dot{M}_{out} &= - \dfrac{M_{out}}{\tau_{out}} + \dfrac{M_{in}}{\tau_{in}} \Blue{- \dfrac{M_{out}}{\tau_{drag,out}}}
+\end{eqnarray}
+
+\end{document}
